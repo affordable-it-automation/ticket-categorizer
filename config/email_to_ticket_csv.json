@@ -1,5 +1,5 @@
 {
-  "input_path": "tmp_emails",
+  "input_path": "data/",
   "output": "data/sample_emails.csv",
   "recursive": false,
   "replace": false

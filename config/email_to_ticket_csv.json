@@ -1,0 +1,6 @@
+{
+  "input_path": "tmp_emails",
+  "output": "data/sample_emails.csv",
+  "recursive": false,
+  "replace": false
+}

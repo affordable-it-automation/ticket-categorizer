@@ -1,5 +1,6 @@
 import csv
 import os
+from config import input,output
 
 sales_keywords = ["pricing", "quote", "services", "automation"]
 support_keywords = ["error", "broken", "issue", "help", "password"]
@@ -8,7 +9,7 @@ sales = []
 support = []
 general = []
 
-with open("../data/sample_emails.csv") as file:
+with open(input) as file:
     reader = csv.DictReader(file)
 
     for row in reader:
@@ -24,9 +25,9 @@ with open("../data/sample_emails.csv") as file:
             general.append(row)
 
 def write_file(filename, rows):
-    os.makedirs("../output", exist_ok=True)
+    os.makedirs(output, exist_ok=True)
 
-    with open(f"../output/{filename}", "w", newline="") as file:
+    with open(f"{output}/{filename}", "w", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=["email","subject","message"])
         writer.writeheader()
         writer.writerows(rows)

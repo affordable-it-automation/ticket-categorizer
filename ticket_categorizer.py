@@ -1,15 +1,18 @@
 import csv
 import os
-from config import input,output
+from pathlib import Path
 
 sales_keywords = ["pricing", "quote", "services", "automation"]
 support_keywords = ["error", "broken", "issue", "help", "password"]
+project_root = Path(__file__).resolve().parent.parent
+input_file = project_root / "data" / "sample_emails.csv"
+output_dir = project_root / "output"
 
 sales = []
 support = []
 general = []
 
-with open(input) as file:
+with input_file.open(newline="", encoding="utf-8") as file:
     reader = csv.DictReader(file)
 
     for row in reader:
@@ -25,9 +28,9 @@ with open(input) as file:
             general.append(row)
 
 def write_file(filename, rows):
-    os.makedirs(output, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
-    with open(f"{output}/{filename}", "w", newline="") as file:
+    with (output_dir / filename).open("w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=["email","subject","message"])
         writer.writeheader()
         writer.writerows(rows)
